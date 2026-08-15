@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}login — subxero{% endblock %}
+
+{% block head %}
+<style>
+  .login-box{max-width:360px;margin:80px auto 0}
+  h1{font-size:18px;margin-bottom:32px;letter-spacing:2px}
+  .field{margin-bottom:20px}
+  button{width:100%;margin-top:12px}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-box">
+  <h1>ADMIN ACCESS</h1>
+  <form method="post">
+    <div class="field">
+      <label>EMAIL</label>
+      <input type="email" name="email" required autofocus>
+    </div>
+    <div class="field">
+      <label>PASSWORD</label>
+      <input type="password" name="password" required>
+    </div>
+    <button type="submit" class="btn">ENTER</button>
+  </form>
+</div>
+{% endblock %}

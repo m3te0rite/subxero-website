@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}subxero — monochrome. cold. invisible.{% endblock %}
+
+{% block head %}
+<style>
+  .logo{font-size:64px;font-weight:700;letter-spacing:-2px;margin-bottom:12px}
+  .logo .glyph{animation:pulse 3s ease-in-out infinite}
+  .tagline{font-size:14px;color:var(--dim);letter-spacing:4px;text-transform:uppercase;margin-top:8px}
+  .tagline .word{opacity:0;display:inline-block;animation:fadeIn .6s ease forwards}
+  .tagline .word:nth-child(1){animation-delay:1.0s}
+  .tagline .word:nth-child(2){animation-delay:1.3s}
+  .tagline .word:nth-child(3){animation-delay:1.6s}
+  .hero{text-align:center;margin:60px 0 80px}
+  .hero h1{font-size:20px;font-weight:400;max-width:520px;margin:0 auto 28px;color:var(--mid);line-height:1.6}
+  .cursor{display:inline-block;width:10px;height:18px;background:var(--text);margin-left:4px;vertical-align:middle;animation:blink 1s step-end infinite}
+  .features{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:80px}
+  .feature{background:var(--bg);padding:28px 24px}
+  .feature .label{font-size:11px;color:var(--dim);letter-spacing:2px;margin-bottom:10px}
+  .feature h3{font-size:15px;font-weight:700;margin-bottom:8px}
+  .feature p{font-size:13px;color:var(--mid)}
+  .cta{text-align:center}
+  .cta p{font-size:13px;color:var(--dim);margin-bottom:28px;letter-spacing:1px}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+  @media(max-width:600px){.features{grid-template-columns:1fr}.logo{font-size:42px}}
+</style>
+{% endblock %}
+
+{% block content %}
+<header style="text-align:center;margin-bottom:40px">
+  <div class="logo"><span class="glyph">⊗</span> SUBXERO</div>
+  <div class="tagline">
+    <span class="word">monochrome.</span>
+    <span class="word">cold.</span>
+    <span class="word">invisible.</span>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>
+    A floating Gemini overlay that stays off the record.<br>
+    Screen capture. Live models. Zero footprint.
+    <span class="cursor"></span>
+  </h1>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <div class="label">01 — STEALTH</div>
+    <h3>Excluded from capture</h3>
+    <p>Uses Windows display affinity so the window never appears in screenshots or recordings.</p>
+  </div>
+  <div class="feature">
+    <div class="label">02 — MODELS</div>
+    <h3>Live model list</h3>
+    <p>Pulls the current Gemini models directly from Google. Always up to date.</p>
+  </div>
+  <div class="feature">
+    <div class="label">03 — VISION</div>
+    <h3>Screen → answer</h3>
+    <p>One click captures the screen, sends it to Gemini, and returns a clean response.</p>
+  </div>
+  <div class="feature">
+    <div class="label">04 — LOCAL</div>
+    <h3>No cloud UI</h3>
+    <p>Runs entirely on your machine. API key stays local. No accounts. No tracking.</p>
+  </div>
+</section>
+
+<section class="cta">
+  <p>WINDOWS · FREE TIER READY</p>
+  <a href="{{ url_for('releases') }}" class="btn">GET THE CODE</a>
+</section>
+{% endblock %}

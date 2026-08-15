@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}admin — subxero{% endblock %}
+
+{% block head %}
+<style>
+  h1{font-size:18px;letter-spacing:2px;margin-bottom:32px}
+  .form-box{max-width:480px;margin-bottom:60px}
+  .field{margin-bottom:18px}
+  .list{border-top:1px solid var(--border)}
+  .item{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 0;border-bottom:1px solid var(--border);font-size:14px;
+  }
+  .item .ver{font-weight:700}
+  .item .act form{display:inline}
+  .item button{
+    background:none;border:none;color:var(--dim);font-family:inherit;
+    font-size:12px;cursor:pointer;letter-spacing:1px;
+  }
+  .item button:hover{color:#c44}
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>PUBLISH RELEASE</h1>
+
+<div class="form-box">
+  <form method="post" enctype="multipart/form-data">
+    <div class="field">
+      <label>VERSION</label>
+      <input type="text" name="version" placeholder="1.0.0" required>
+    </div>
+    <div class="field">
+      <label>SHORT DESCRIPTION</label>
+      <textarea name="description" rows="3" placeholder="What changed in this build..." required></textarea>
+    </div>
+    <div class="field">
+      <label>.EXE FILE</label>
+      <input type="file" name="exe" accept=".exe" required>
+    </div>
+    <button type="submit" class="btn">PUBLISH</button>
+  </form>
+</div>
+
+<h1 style="margin-top:40px">EXISTING RELEASES</h1>
+<div class="list">
+  {% for r in releases %}
+    <div class="item">
+      <div>
+        <span class="ver">v{{ r.version }}</span>
+        <span style="color:var(--dim);margin-left:12px">{{ r.created_at[:10] }}</span>
+        <div style="color:var(--mid);font-size:13px;margin-top:4px">{{ r.description }}</div>
+      </div>
+      <div class="act">
+        <form method="post" action="{{ url_for('delete_release', release_id=r.id) }}"
+              onsubmit="return confirm('Delete this release?')">
+          <button type="submit">delete</button>
+        </form>
+      </div>
+    </div>
+  {% else %}
+    <p style="color:var(--dim);padding:24px 0">no releases yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}releases — subxero{% endblock %}
+
+{% block head %}
+<style>
+  h1{font-size:22px;font-weight:700;margin-bottom:8px}
+  .sub{font-size:13px;color:var(--dim);margin-bottom:50px;letter-spacing:1px}
+  .timeline{position:relative;padding-left:32px}
+  .timeline::before{
+    content:"";position:absolute;left:6px;top:8px;bottom:8px;
+    width:1px;background:var(--border);
+  }
+  .release{
+    position:relative;margin-bottom:40px;padding-bottom:8px;
+  }
+  .release::before{
+    content:"";position:absolute;left:-32px;top:6px;
+    width:11px;height:11px;border:1px solid var(--text);
+    background:var(--bg);border-radius:50%;
+  }
+  .version{font-size:16px;font-weight:700;margin-bottom:6px}
+  .desc{font-size:14px;color:var(--mid);margin-bottom:14px;max-width:520px}
+  .meta{font-size:12px;color:var(--dim)}
+  .empty{color:var(--dim);font-size:14px;padding:40px 0}
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>releases</h1>
+<p class="sub">TIMELINE · DOWNLOAD THE LATEST BUILD</p>
+
+{% if releases %}
+  <div class="timeline">
+    {% for r in releases %}
+      <div class="release">
+        <div class="version">v{{ r.version }}</div>
+        <div class="desc">{{ r.description }}</div>
+        <div class="meta">
+          {{ r.created_at[:10] }}
+          &nbsp;·&nbsp;
+          <a href="{{ url_for('download', release_id=r.id) }}">download .exe</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="empty">no releases yet.</p>
+{% endif %}
+{% endblock %}
