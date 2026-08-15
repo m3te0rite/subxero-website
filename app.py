@@ -50,8 +50,8 @@ def init_db():
     cur = conn.execute("SELECT COUNT(*) FROM users")
     if cur.fetchone()[0] == 0:
         # CHANGE THESE CREDENTIALS
-        email = "admin@subxero.local"
-        password = "change-me-now"
+        email = "aarav.xtech@gmail.com"
+        password = "aa&*KjXq325247"
         pw_hash = generate_password_hash(password)
         conn.execute(
             "INSERT INTO users (email, password_hash) VALUES (?, ?)",
